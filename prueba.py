@@ -1,10 +1,26 @@
 import streamlit as st
 
-st.title("Saludador...")
-nombre = st.text_input("Escribe tu nombre")
-edad = st.number_input("Escribe tu edad", min_value=18, max_value=65, step=1)   
-nacimiento = st.date_input("Fecha de nacimiento")
-if nombre:
-    st.header(f"Hola, {nombre} tenes {edad} años!")
-else:
-    st.error("Por favor, ingresa tu nombre.")
+
+ss = st.session_state
+
+ss.setdefault('contador', 0)
+
+if st.button("Incrementar"):
+    ss.contador += 1
+    
+
+tab1, tab2, tab3 = st.tabs([":cat: Cat", ":dog: Dog", ":owl: Owl"])
+
+with tab1:
+    st.header("A cat")
+    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+with tab2:
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+with tab3:
+    st.header("An owl")
+    c1, c2 = st.columns(2)
+    if c1.button("Festejar!"):
+        st.balloons()
+    c2.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+    
